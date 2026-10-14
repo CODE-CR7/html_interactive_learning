@@ -9,6 +9,8 @@ ACTIVITY_GLOB = ROOT.join("activities", "**", "index.html").to_s
 REQUIRED_FIELDS = %w[schemaVersion id order class subject topic title description activityType status].freeze
 CLASS_SLUGS = { "III" => "3", "VI" => "6", "VII" => "7", "VIII" => "8", "IX" => "9", "X" => "10" }.freeze
 VALID_STATUSES = %w[active planned].freeze
+# The requested translation widget is the only permitted external script.
+TRANSLATION_SCRIPT = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit".freeze
 
 def slug(value)
   value.to_s.unicode_normalize(:nfkd).encode("ASCII", invalid: :replace, undef: :replace, replace: "")
@@ -56,7 +58,8 @@ def build_activity(path)
   raise "#{path.relative_path_from(ROOT)}: invalid status #{metadata['status'].inspect}" unless VALID_STATUSES.include?(metadata["status"])
   validate_path(path, metadata)
 
-  if content.match?(%r{^\s*<script\b[^>]+src=["'][^"']+["']}i)
+  external_scripts = content.scan(%r{<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["']}i).flatten
+  if external_scripts.any? { |source| source != TRANSLATION_SCRIPT }
     raise "#{path.relative_path_from(ROOT)}: JavaScript must be embedded in the HTML"
   end
   if content.match?(%r{^\s*<link\b[^>]+rel=["']stylesheet["']}i) || content.match?(%r{^\s*<link\b[^>]+href=["'][^"']+["'][^>]+rel=["']stylesheet["']}i)

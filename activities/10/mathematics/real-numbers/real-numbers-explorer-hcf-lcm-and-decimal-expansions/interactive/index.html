@@ -292,6 +292,12 @@
   header.app-header h1 { font-size:clamp(28px,4.5vw,48px); line-height:1.15; margin:12px 0 16px; letter-spacing:-1px; }
   header.app-header p { color:#dcebe0; line-height:1.6; }
   .reading-eyebrow { font-size:11px; text-transform:uppercase; letter-spacing:1.6px; font-weight:700; }
+  .language-bar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding:16px 20px; margin:16px 0; border:1px solid var(--line); border-radius:14px; background:#fff; }
+  .language-bar strong { display:block; }
+  .language-bar small { color:var(--muted); }
+  #google_translate_element { max-width:100%; }
+  #google_translate_element select { max-width:100%; padding:9px; border:1px solid #b4c5b8; border-radius:8px; background:#fff; color:var(--ink); font:inherit; }
+  #translation-status { margin:0; font-size:13px; color:var(--muted); }
   nav.tabs { display:flex; flex-wrap:wrap; margin:20px 0; }
   nav.tabs button { flex:1 1 170px; }
   button,input,select,textarea { font:inherit; }
@@ -374,6 +380,12 @@
     <div class="reading-eyebrow">Class X · Question-reading lab</div><h1>You know the maths.<br>Now read the question.</h1>
     <p>Find what the question is asking for, choose a model, and explain why it fits. Explore at your own pace, with hints and worked solutions whenever you need them.</p>
   </header>
+
+  <section class="language-bar" aria-label="Page translation">
+    <div><strong>Read in your language</strong><small class="notranslate" translate="no">English · हिन्दी · తెలుగు</small></div>
+    <div id="google_translate_element" aria-label="Choose translation language"></div>
+    <p id="translation-status" role="status">Loading language selector…</p>
+  </section>
 
   <nav class="tabs" aria-label="Learning areas">
     <button data-panel="reading" class="active" type="button" aria-pressed="true">Read the question</button>
@@ -2064,5 +2076,26 @@
 })();
 
 </script>
+<script>
+function googleTranslateElementInit() {
+  try {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,hi,te',
+      autoDisplay: false
+    }, 'google_translate_element');
+    document.getElementById('translation-status').textContent = '';
+  } catch (error) {
+    document.getElementById('translation-status').textContent = 'Translation is unavailable. You can continue in English.';
+  }
+}
+window.addEventListener('error', function (event) {
+  if (event.target instanceof HTMLScriptElement &&
+      event.target.src.replace(/^https?:/, '') === '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit') {
+    document.getElementById('translation-status').textContent = 'Translation could not load. Check your internet connection; the activity still works in English.';
+  }
+}, true);
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
