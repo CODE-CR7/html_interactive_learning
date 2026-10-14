@@ -23,6 +23,7 @@ Append these examples to the corresponding `index.html` path:
 | `10/mathematics/real-numbers/act1` | `number=91&focus=prime-factorization` | Factors, composite/prime classification; optional `compare_number=9` |
 | `10/mathematics/real-numbers/real-numbers-explorer-hcf-lcm-and-decimal-expansions/interactive` | `numbers=8%2C12%2C15&focus=lcm` | HCF/LCM of two to six positive integers; `focus=euclid` for the first pair |
 | Same HCF/LCM activity | `focus=irrational&number=sqrt2` | Nonterminating, nonrepeating irrational decimals (`sqrt2`, `sqrt3`, `pi`) |
+| Same HCF/LCM activity | `focus=reading&reading_level=advanced` | Question-reading practice across 30 forms; levels: `novice`, `intermediate`, `advanced`, `superior`, `distinguished` |
 | `9/mathematics/geometry-circles/perpendicular-from-centre-to-chord` | `chord=16&distance=6` | Derive radius from chord length and perpendicular distance |
 | Same chord activity | `radius=13&distance=5` | Derive chord length from radius and perpendicular distance |
 | `10/mathematics/geometry-circles/tangents-to-circle` | `radius=5&tangent_length=12` | Equal tangent lengths; alternatively supply `radius=5&distance=13` (OP) |

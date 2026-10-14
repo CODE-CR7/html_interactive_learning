@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>Real Numbers Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Read the Question — HCF &amp; LCM Reading Lab</title>
 <style>
   :root {
     --ink: #1f2430;
@@ -284,6 +284,71 @@
 
   .error-msg { color: var(--bad); font-size: 0.85rem; margin: 4px 0 0; min-height: 1.1em; }
   footer { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 24px; }
+  /* Question reading is the starting point; calculators remain supporting tools. */
+  :root { --primary:#245b52; --primary-dark:#17463e; --primary-light:#e8f2ed; --bg:#f4f4ed; --ink:#20362f; --muted:#54675e; --line:#d9e2d9; }
+  [hidden] { display:none!important; }
+  .wrap { max-width:1220px; }
+  header.app-header { background:#183e36; padding:32px; border-radius:22px; }
+  header.app-header h1 { font-size:clamp(28px,4.5vw,48px); line-height:1.15; margin:12px 0 16px; letter-spacing:-1px; }
+  header.app-header p { color:#dcebe0; line-height:1.6; }
+  .reading-eyebrow { font-size:11px; text-transform:uppercase; letter-spacing:1.6px; font-weight:700; }
+  nav.tabs { display:flex; flex-wrap:wrap; margin:20px 0; }
+  nav.tabs button { flex:1 1 170px; }
+  button,input,select,textarea { font:inherit; }
+  button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,a:focus-visible { outline:3px solid #bc6725; outline-offset:3px; }
+  .reading-principles { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  .reading-principles>div { background:#e8efdf; padding:22px; border-radius:16px; }
+  .reading-principles>div+div { background:#f5eadb; }
+  .reading-principles h2 { font-size:20px; margin:8px 0; }
+  .reading-principles p { margin:0; line-height:1.6; }
+  .reading-layout { display:grid; grid-template-columns:290px minmax(0,1fr); gap:20px; align-items:start; }
+  .reading-library { padding:20px; }
+  .reading-library label,.reading-workspace label { display:block; font-weight:650; font-size:14px; margin:10px 0; }
+  .reading-library input[type=search],.reading-library select,.reading-workspace textarea,.reading-workspace input { width:100%; border:1px solid #b4c5b8; border-radius:9px; padding:11px; background:#fff; color:var(--ink); }
+  .reading-library .all-levels { display:flex; align-items:center; gap:8px; margin:20px 0 8px; }
+  .reading-share { color:var(--primary-dark); text-decoration:underline; }
+  .reading-library p { font-size:13px; line-height:1.6; }
+  #reading-library { display:grid; gap:8px; max-height:680px; overflow-y:auto; padding:3px; }
+  .form-choice { width:100%; text-align:left; padding:12px; border:1px solid var(--line); border-radius:10px; background:#f8f9f3; color:var(--ink); cursor:pointer; font-size:14px; line-height:1.45; }
+  .form-choice[aria-pressed=true] { background:var(--primary-dark); color:white; border-color:var(--primary-dark); }
+  .form-choice small { display:block; margin-top:5px; opacity:.8; }
+  .reading-workspace { padding:clamp(18px,3vw,30px); }
+  .reading-workspace h2 { font-size:25px; line-height:1.35; }
+  .question-text { font-size:20px; line-height:1.9; background:#f8f8f1; border-left:4px solid #c1ab7b; border-radius:0 12px 12px 0; padding:20px; margin:20px 0 12px; }
+  .word-fragment { font:inherit; line-height:inherit; background:transparent; color:inherit; border:0; border-bottom:2px dotted #a2b1a3; cursor:pointer; padding:0 2px; text-align:left; }
+  .word-fragment[aria-pressed=true] { background:#e1eedf; border-bottom-color:#245b52; border-radius:4px; }
+  .reading-section { margin-top:26px; padding-top:22px; border-top:1px solid var(--line); }
+  .reading-section h3 { margin:0 0 10px; color:var(--ink); font-size:19px; }
+  .reading-workspace p { line-height:1.65; }
+  .reading-choices { display:grid; gap:9px; }
+  .reading-choice { border:1px solid var(--line); border-radius:10px; background:#fff; padding:12px 15px; text-align:left; color:var(--ink); cursor:pointer; line-height:1.5; }
+  .reading-choice[aria-pressed=true] { border:2px solid var(--primary); padding:11px 14px; background:var(--primary-light); }
+  .reading-feedback:not(:empty),#phrase-feedback:not(:empty),#paraphrase-model { margin:12px 0; padding:14px; background:#eff4e8; border-radius:10px; line-height:1.65; }
+  .reading-feedback.retry { background:#fff1e5; color:#784c22; }
+  #meaning-visual:not(:empty) { margin-top:16px; padding:16px; border:1px solid var(--line); border-radius:12px; }
+  .meaning-numbers { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+  .meaning-numbers span { padding:6px 12px; border-radius:8px; background:#f0f3e9; }
+  .meaning-numbers .match { background:#245b52; color:white; }
+  .contrast summary,.reading-map summary,.reflection summary { cursor:pointer; font-weight:700; line-height:1.6; }
+  .contrast-controls { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0; }
+  #contrast-output { line-height:1.7; }
+  #worked-solution { margin:20px 0 0; background:#f3f6ec; border:1px solid #d6e4cc; border-radius:14px; padding:20px; line-height:1.75; overflow-wrap:anywhere; }
+  #worked-solution ol { padding-left:23px; }
+  .worked-answer { font-size:22px; font-weight:750; color:#17463e; }
+  .reading-workspace textarea { resize:vertical; margin-bottom:10px; }
+  .reflection { margin-top:24px; padding-top:20px; border-top:1px solid var(--line); font-size:14px; line-height:1.8; }
+  .reading-map { margin-top:6px; }
+  .map-scroll { overflow:auto; }
+  .reading-map table { width:100%; border-collapse:collapse; font-size:14px; margin-top:16px; }
+  .reading-map th,.reading-map td { padding:12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  .reading-map button { color:var(--primary-dark); padding:6px 10px; border:1px solid var(--line); background:white; border-radius:7px; cursor:pointer; }
+  #answer-entry { margin:12px 0; }
+  #reading-url-notice:empty { display:none; }
+  #topic-preset { width:100%!important; margin:0!important; max-width:none!important; border-color:var(--line)!important; }
+  @media(max-width:850px) { .reading-layout { grid-template-columns:1fr; } #reading-library { max-height:220px; grid-template-columns:1fr 1fr; } }
+  @media(max-width:550px) { .reading-principles { grid-template-columns:1fr; } header.app-header { padding:24px; } #reading-library { grid-template-columns:1fr; } .question-text { font-size:18px; padding:16px; } nav.tabs button { flex-basis:130px; } }
+  @media(prefers-reduced-motion:reduce) { .panel.active { animation:none; } button:active { transform:none!important; } }
+
 </style>
 <script type="application/json" id="activity-metadata">
 {
@@ -294,11 +359,11 @@
   "subject": "Mathematics",
   "topic": "Real Numbers",
   "subtopic": "Real Numbers Explorer - HCF, LCM and Decimal Expansions",
-  "title": "Real Numbers Explorer - HCF, LCM and Decimal Expansions — Interactive",
-  "description": "Three linked mini-tools for NCERT Class X Chapter 1 (Real Numbers). Students\nfind the HCF of two numbers step by step with Euclid's Division Algorithm,\nbuild a prime-factorisation ladder for two numbers to derive HCF and LCM from\nthe Fundamental Theorem of Arithmetic, and test any fraction to predict -\nbefore dividing - whether its decimal expansion terminates or repeats, based\non the prime factors of the denominator.\n\nA second, five-stage variation (Explore, Learn, Guided Practice, Challenge\nZone, Exam Practice) walks through the same HCF/LCM/prime-factorisation\nskills with a self-paced step-by-step format, a quick multiple-choice\nchallenge, and two self-contained CBSE-style case studies.",
+  "title": "Real Numbers Explorer — HCF & LCM Question Reading Lab",
+  "description": "Practise recognizing 30 HCF/LCM question forms through five reading levels: identify the target quantity, interpret the wording, choose and justify a mathematical model, paraphrase the question, and explore worked solutions. Includes Euclid, prime-factorisation, decimal and reusable number tools.",
   "activityType": "exploration",
   "status": "active",
-  "activity_url_parameters": "numbers=72%2C120&focus=hcf-lcm"
+  "activity_url_parameters": "focus=reading&reading_level=intermediate"
 }
 </script>
 </head>
@@ -306,18 +371,55 @@
 <div class="wrap">
 
   <header class="app-header">
-    <h1>Real Numbers Explorer</h1>
-    <p>Class X · Mathematics · Chapter: Real Numbers — Euclid's Division Algorithm, the Fundamental Theorem of Arithmetic, and decimal expansions of rational numbers.</p>
+    <div class="reading-eyebrow">Class X · Question-reading lab</div><h1>You know the maths.<br>Now read the question.</h1>
+    <p>Find what the question is asking for, choose a model, and explain why it fits. Explore at your own pace, with hints and worked solutions whenever you need them.</p>
   </header>
 
-  <nav class="tabs">
-    <button data-panel="euclid" class="active" type="button">HCF by Euclid's Algorithm</button>
-    <button data-panel="ladder" type="button">Prime Factor Ladder → HCF &amp; LCM</button>
-    <button data-panel="decimal" type="button">Will It Terminate?</button>
+  <nav class="tabs" aria-label="Learning areas">
+    <button data-panel="reading" class="active" type="button" aria-pressed="true">Read the question</button>
+    <button data-panel="euclid" type="button" aria-pressed="false">HCF by Euclid's Algorithm</button>
+    <button data-panel="ladder" type="button" aria-pressed="false">Prime Factor Ladder → HCF &amp; LCM</button>
+    <button data-panel="decimal" type="button" aria-pressed="false">Will It Terminate?</button>
+    <button data-panel="sandbox" type="button" aria-pressed="false">Number sandbox</button>
   </nav>
 
+  <section class="panel active" data-panel="reading" aria-label="Question reading practice">
+    <div class="reading-principles">
+      <div><span class="reading-eyebrow">A shared divisor</span><h2>HCF: divide what you have.</h2><p>An equal length or a number of identical groups must divide every given quantity.</p></div>
+      <div><span class="reading-eyebrow">A shared multiple</span><h2>LCM: reach a common total.</h2><p>A total quantity or elapsed time must be a multiple of every group size or cycle.</p></div>
+    </div>
+    <details class="contrast card"><summary>“Groups” can mean two different things. Compare them.</summary>
+      <div class="contrast-controls"><button type="button" class="btn secondary" data-contrast="divide">Maximum identical groups</button><button type="button" class="btn secondary" data-contrast="multiple">Minimum total students</button></div>
+      <div id="contrast-output"></div>
+    </details>
+    <div class="reading-layout">
+      <aside class="reading-library card" aria-label="Choose question language">
+        <label for="reading-level">Choose your reading level</label>
+        <select id="reading-level"><option value="novice">Novice · direct instructions</option><option value="intermediate">Intermediate · paraphrases</option><option value="advanced">Advanced · stories without HCF/LCM</option><option value="superior">Superior · conditions & multiple steps</option><option value="distinguished">Distinguished · justify & critique</option></select>
+        <p id="level-description" class="muted"></p>
+        <label for="reading-filter">Find a question form</label><input id="reading-filter" type="search" placeholder="Try bells, remainder, powers…">
+        <label class="all-levels"><input id="all-levels" type="checkbox"> Browse all 30 forms</label>
+        <p id="library-count" class="muted"></p><p><a id="reading-share" class="reading-share">Open this reading level</a></p>
+        <div id="reading-library"></div>
+      </aside>
+      <article class="reading-workspace card" aria-label="Read and reason">
+        <div id="question-area"></div>
+        <div class="reading-section"><h3>1. Name the target quantity</h3><p class="muted">What must your answer represent? Think about what is being maximized or minimized.</p><div id="goal-options" class="reading-choices"></div><div id="goal-feedback" class="reading-feedback" role="status"></div></div>
+        <div class="reading-section"><h3>2. Choose a mathematical model</h3><div id="model-options" class="reading-choices"></div><div id="model-feedback" class="reading-feedback" role="status"></div><div id="meaning-visual"></div></div>
+        <div class="reading-section"><h3>3. Explain the choice</h3><div id="reason-options" class="reading-choices"></div><div id="reason-feedback" class="reading-feedback" role="status"></div>
+          <label for="paraphrase">Put the question into your own mathematical words</label><textarea id="paraphrase" rows="3" placeholder="I need to find… because…"></textarea>
+          <button type="button" id="show-paraphrase" class="btn ghost">Compare with a model paraphrase</button><div id="paraphrase-model" hidden></div>
+        </div>
+        <div class="reading-section"><h3>4. Solve and reflect</h3><div id="answer-entry"></div><div class="btn-row"><button type="button" class="btn" id="show-worked">Explore the worked solution</button><button type="button" class="btn secondary" id="next-form">Next question form →</button></div><div id="worked-solution" hidden></div></div>
+        <details class="reflection"><summary>Self-check your reading</summary><ul><li>Did I name the quantity and its unit?</li><li>Does my answer divide the quantities, or do the quantities divide my answer?</li><li>Did I use only the relevant information?</li><li>Have I checked all conditions, including remainders or missing-number constraints?</li><li>Can I explain my choice without quoting a keyword?</li></ul><p>Your explanation is for reflection; this activity does not automatically grade free-text writing.</p></details>
+      </article>
+    </div>
+    <details class="card reading-map"><summary>See the complete 30-form question-language map</summary><p class="muted">These levels organize reading practice; they are not an official exam or proficiency score.</p><div class="map-scroll"><table><thead><tr><th>#</th><th>Question wording</th><th>Recognize</th><th>Practice</th></tr></thead><tbody id="language-map"></tbody></table></div></details>
+    <p id="reading-url-notice" class="error-msg" role="status"></p>
+  </section>
+
   <!-- ================= PANEL 1: EUCLID ================= -->
-  <section class="panel active" data-panel="euclid">
+  <section class="panel" data-panel="euclid">
     <div class="card">
       <h2>Find the HCF with Euclid's Division Algorithm</h2>
       <p class="lede">
@@ -453,7 +555,9 @@
     </div>
   </section>
 
-  <footer>Real Numbers Explorer · HTML Interactive Learning</footer>
+  <section class="panel" data-panel="sandbox" aria-label="Number sandbox"><div id="preset-mount"></div></section>
+
+  <footer>Read the situation, not just the keyword · Real Numbers Explorer · HTML Interactive Learning</footer>
 </div>
 
 <script>
@@ -492,7 +596,7 @@
 
   function switchPanel(name) {
     document.querySelectorAll(".panel").forEach(p => p.classList.toggle("active", p.dataset.panel === name));
-    document.querySelectorAll("nav.tabs button").forEach(b => b.classList.toggle("active", b.dataset.panel === name));
+    document.querySelectorAll("nav.tabs button").forEach(b => { b.classList.toggle("active", b.dataset.panel === name); b.setAttribute("aria-pressed", String(b.dataset.panel === name)); });
   }
   document.querySelectorAll("nav.tabs button").forEach(b => {
     b.addEventListener("click", () => switchPanel(b.dataset.panel));
@@ -842,13 +946,1065 @@
   })();
 })();
 </script>
+<script>
+/* Reading practice uses local examples, never a remote question bank. */
+(() => {
+  'use strict';
+  const QUESTIONS = [
+  {
+    "id": 1,
+    "title": "Find the HCF",
+    "level": "novice",
+    "prompt": "[[Find the HCF|This names the operation directly.]] of [[96 and 404|These are the two input quantities.]].",
+    "model": "hcf",
+    "goal": "The greatest positive integer that divides both numbers.",
+    "reason": "A common divisor must divide both 96 and 404; take the greatest one.",
+    "paraphrase": "Find the largest d such that 96 ÷ d and 404 ÷ d are whole numbers.",
+    "steps": [
+      "96 = 2⁵ × 3; 404 = 2² × 101.",
+      "The only common prime is 2; the smaller exponent is 2.",
+      "HCF = 2² = 4."
+    ],
+    "answer": 4,
+    "nums": [
+      96,
+      404
+    ],
+    "unit": "",
+    "trap": "",
+    "goal_wrong": [
+      "The first common multiple of 96 and 404.",
+      "The total 96 + 404."
+    ],
+    "reason_wrong": [
+      "A shared multiple of 96 and 404 is the requested divisor.",
+      "Use every prime from either number at its greatest power."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Find the LCM",
+    "level": "novice",
+    "prompt": "[[Find the LCM|This names the operation directly.]] of [[12, 15 and 20|All three numbers must divide the result.]].",
+    "model": "lcm",
+    "goal": "The smallest positive integer divisible by all three numbers.",
+    "reason": "The answer must be a multiple of 12, 15 and 20, so choose their least common multiple.",
+    "paraphrase": "Find the least positive M with M ÷ 12, M ÷ 15 and M ÷ 20 all whole.",
+    "steps": [
+      "12 = 2² × 3; 15 = 3 × 5; 20 = 2² × 5.",
+      "Use the greatest power of each prime: 2² × 3 × 5.",
+      "LCM = 60."
+    ],
+    "answer": 60,
+    "nums": [
+      12,
+      15,
+      20
+    ],
+    "unit": "",
+    "trap": "",
+    "goal_wrong": [
+      "The greatest divisor of the three numbers.",
+      "The sum of the three numbers."
+    ],
+    "reason_wrong": [
+      "Take only prime factors common to all three numbers, at their smallest powers.",
+      "Multiply 12, 15 and 20; the product is always the least common multiple."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Using prime factorisation",
+    "level": "novice",
+    "prompt": "[[Using prime factorisation|This specifies a method, not an extra quantity.]], find [[HCF and LCM|There are two requested answers.]] of 26 and 91.",
+    "model": "prime",
+    "goal": "Both the greatest common divisor and the least common multiple.",
+    "reason": "Shared minimum prime powers give HCF; all maximum prime powers give LCM.",
+    "paraphrase": "Write both numbers as prime products, then use minimum and maximum prime exponents.",
+    "steps": [
+      "26 = 2 × 13; 91 = 7 × 13.",
+      "HCF = 13; LCM = 2 × 7 × 13 = 182.",
+      "Check: 13 × 182 = 2366 = 26 × 91."
+    ],
+    "answer": "HCF = 13; LCM = 182",
+    "nums": [
+      26,
+      91
+    ],
+    "unit": "",
+    "trap": "",
+    "goal_wrong": [
+      "Only the prime factors of the first number.",
+      "Only the product of the two numbers."
+    ],
+    "reason_wrong": [
+      "Use the greatest prime powers for both HCF and LCM.",
+      "Add the prime factors to get the HCF and multiply them to get the LCM."
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Given prime factorisations",
+    "level": "novice",
+    "prompt": "If [[a = 2³ × 3² × 5 and b = 2² × 3 × 5²|Read the exponents as powers, not multipliers.]], [[find their HCF|The target is the greatest shared divisor, so compare minimum powers.]].",
+    "model": "hcf",
+    "goal": "The greatest divisor shared by the two prime products.",
+    "reason": "Each common prime uses the smaller exponent, so it divides both numbers.",
+    "paraphrase": "Take min(3,2) for 2, min(2,1) for 3, and min(1,2) for 5.",
+    "steps": [
+      "Compare powers: for 2, min(3,2) = 2; for 3, min(2,1) = 1; for 5, min(1,2) = 1.",
+      "HCF = 2² × 3 × 5 = 60."
+    ],
+    "answer": 60,
+    "nums": [
+      360,
+      300
+    ],
+    "unit": "",
+    "trap": "For HCF use the smaller powers. Using the greater powers gives the LCM, 1800.",
+    "goal_wrong": [
+      "The smallest positive total divisible by all the given quantities.",
+      "The sum of all the given quantities."
+    ],
+    "reason_wrong": [
+      "Use the larger exponent of every shared prime to get HCF.",
+      "Read 2³ as 2 × 3 and 3² as 3 × 2."
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Verify the HCF–LCM relationship",
+    "level": "novice",
+    "prompt": "[[Verify the relationship|Compute and compare both sides; stating the formula alone is not verification.]] between HCF and LCM for [[26 and 91|The product rule here is for exactly two positive integers.]].",
+    "model": "relationship",
+    "goal": "An equality between HCF × LCM and the product of the two numbers.",
+    "reason": "For two positive integers, HCF × LCM equals their product.",
+    "paraphrase": "Calculate H and L for 26 and 91, then compare H × L with 26 × 91.",
+    "steps": [
+      "HCF = 13 and LCM = 182.",
+      "HCF × LCM = 13 × 182 = 2366.",
+      "26 × 91 = 2366, so both sides agree."
+    ],
+    "answer": "Both products equal 2366",
+    "nums": [
+      26,
+      91
+    ],
+    "unit": "",
+    "trap": "Do not apply this product identity unchanged to three numbers. For 12, 15, 20: HCF × LCM = 60, but their product is 3600.",
+    "goal_wrong": [
+      "A value found by adding all quantities mentioned.",
+      "The HCF of the numbers as printed, regardless of which are products or conditions."
+    ],
+    "reason_wrong": [
+      "The identity HCF + LCM = a + b verifies the relationship.",
+      "The product relationship works unchanged for any number of integers."
+    ]
+  },
+  {
+    "id": 6,
+    "title": "HCF given, find LCM",
+    "level": "novice",
+    "prompt": "Two numbers are [[72 and 120|Both numbers are known]] and their [[HCF is 24|This is supplied, not the target.]]. Find their LCM.",
+    "model": "relationship",
+    "goal": "The least common multiple, using the supplied HCF.",
+    "reason": "Rearrange H × L = a × b to L = a × b ÷ H.",
+    "paraphrase": "Find L = 72 × 120 ÷ 24.",
+    "steps": [
+      "72 × 120 = 8640.",
+      "LCM = 8640 ÷ 24 = 360.",
+      "360 is divisible by both 72 and 120."
+    ],
+    "answer": 360,
+    "nums": [
+      72,
+      120
+    ],
+    "unit": "",
+    "trap": "",
+    "goal_wrong": [
+      "The HCF, which has already been supplied.",
+      "The sum of the two numbers and their HCF."
+    ],
+    "reason_wrong": [
+      "Find LCM by dividing the HCF by the product of the two numbers.",
+      "The given HCF is already the answer because the problem mentions HCF."
+    ]
+  },
+  {
+    "id": 7,
+    "title": "LCM given, find HCF",
+    "level": "superior",
+    "prompt": "The [[product of two positive integers is 2028|This is the product, not one of the integers.]] and their [[LCM is 156|Use the given LCM in the product relationship.]]. Find their HCF.",
+    "model": "relationship",
+    "goal": "The HCF inferred from a product and LCM.",
+    "reason": "HCF = product ÷ LCM for two positive integers.",
+    "paraphrase": "Find H = 2028 ÷ 156.",
+    "steps": [
+      "H × 156 = 2028.",
+      "H = 2028 ÷ 156 = 13.",
+      "A possible pair is 26 and 78: HCF 13, LCM 156."
+    ],
+    "answer": 13,
+    "nums": [],
+    "unit": "",
+    "trap": "Do not treat 2028 and 156 as the two original numbers.",
+    "goal_wrong": [
+      "A value found by adding all quantities mentioned.",
+      "The HCF of the numbers as printed, regardless of which are products or conditions."
+    ],
+    "reason_wrong": [
+      "Treat 2028 and 156 as the original numbers and take their HCF.",
+      "Multiply the given product by the LCM to get HCF."
+    ]
+  },
+  {
+    "id": 8,
+    "title": "One number, HCF and LCM given",
+    "level": "superior",
+    "prompt": "HCF = 6, LCM = 180 and [[one number = 30|Only one original number is known.]]. Find the [[other number|This is neither the HCF nor the LCM.]].",
+    "model": "relationship",
+    "goal": "The missing original number.",
+    "reason": "If a × b = H × L, then the unknown b = H × L ÷ a; check the resulting pair.",
+    "paraphrase": "Find b = 6 × 180 ÷ 30, then verify HCF and LCM.",
+    "steps": [
+      "b = 1080 ÷ 30 = 36.",
+      "HCF(30,36) = 6.",
+      "LCM(30,36) = 180, so all conditions are satisfied."
+    ],
+    "answer": 36,
+    "nums": [
+      30,
+      36
+    ],
+    "unit": "",
+    "trap": "The product equation is necessary but the proposed number must also satisfy the stated HCF and LCM.",
+    "goal_wrong": [
+      "A value found by adding all quantities mentioned.",
+      "The HCF of the numbers as printed, regardless of which are products or conditions."
+    ],
+    "reason_wrong": [
+      "The missing number equals LCM ÷ HCF, regardless of the known number.",
+      "The product formula always guarantees the candidate has the stated HCF and LCM."
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Greatest number that divides",
+    "level": "intermediate",
+    "prompt": "Find the [[greatest number|Maximize a common divisor.]] that [[divides 245 and 1029 exactly|The answer divides the given quantities, with zero remainder.]].",
+    "model": "hcf",
+    "goal": "The greatest common divisor of 245 and 1029.",
+    "reason": "Exact divisibility requires a common factor; greatest selects HCF.",
+    "paraphrase": "Find the largest d with 245 mod d = 0 and 1029 mod d = 0.",
+    "steps": [
+      "245 = 5 × 7²; 1029 = 3 × 7³.",
+      "Use the shared prime with the smaller exponent: 7².",
+      "HCF = 49."
+    ],
+    "answer": 49,
+    "nums": [
+      245,
+      1029
+    ],
+    "unit": "",
+    "trap": "",
+    "goal_wrong": [
+      "The smallest positive total divisible by all the given quantities.",
+      "The sum of all the given quantities."
+    ],
+    "reason_wrong": [
+      "245 and 1029 must divide the answer, so use a shared multiple.",
+      "Any number smaller than 245 divides both quantities exactly."
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Largest possible equal groups",
+    "level": "advanced",
+    "prompt": "[[48 boys and 60 girls|The two existing quantities must both be divided.]] are divided into [[identical groups|Every group has the same number of boys and the same number of girls.]]. Find the [[maximum number of groups|The target is the group count, not the total students.]].",
+    "model": "hcf",
+    "goal": "The maximum number of identical groups.",
+    "reason": "The group count must divide both 48 and 60; its maximum is their HCF.",
+    "paraphrase": "Maximize g subject to 48 ÷ g and 60 ÷ g being whole numbers.",
+    "steps": [
+      "HCF(48,60) = 12, so make 12 groups.",
+      "Each group has 48 ÷ 12 = 4 boys and 60 ÷ 12 = 5 girls.",
+      "Each group therefore has 9 students."
+    ],
+    "answer": 12,
+    "nums": [
+      48,
+      60
+    ],
+    "unit": "groups",
+    "trap": "“Equal groups” alone is not enough. Here existing quantities are split, and the number of identical groups is maximized.",
+    "goal_wrong": [
+      "The greatest number of students in a single group.",
+      "The smallest total that is a multiple of 48 and 60."
+    ],
+    "reason_wrong": [
+      "The word “groups” means LCM, because groups contain multiples of students.",
+      "Maximizing the number of groups means maximizing the size of each group."
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Maximum measuring length",
+    "level": "advanced",
+    "prompt": "Find the [[greatest possible length of a tape|The target is a length that measures both distances exactly.]] that measures [[4 m 80 cm and 6 m|Convert to a common unit before finding HCF.]] exactly. Give the answer in centimetres.",
+    "model": "hcf",
+    "goal": "The greatest tape length in centimetres that divides both distances.",
+    "reason": "After converting both distances to centimetres, the tape length is a shared divisor.",
+    "paraphrase": "Find HCF(480 cm, 600 cm).",
+    "steps": [
+      "4 m 80 cm = 480 cm; 6 m = 600 cm.",
+      "HCF(480,600) = 120.",
+      "The tape length is 120 cm, or 1 m 20 cm."
+    ],
+    "answer": 120,
+    "nums": [
+      480,
+      600
+    ],
+    "unit": "cm",
+    "trap": "HCF(4.80,6) is not an integer HCF calculation. First use the same whole-number unit.",
+    "goal_wrong": [
+      "The smallest positive total divisible by all the given quantities.",
+      "The sum of all the given quantities."
+    ],
+    "reason_wrong": [
+      "Use 480 and 6 directly; both are already lengths.",
+      "The tape must be a multiple of each distance rather than divide each distance."
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Largest square tile",
+    "level": "advanced",
+    "prompt": "What is the [[largest square tile|The unknown is the side length of one square.]] that exactly covers an [[8 m × 6 m floor|Assume a regular grid, tiles aligned with the sides, and no cutting.]] without cutting? Give the side length in metres.",
+    "model": "hcf",
+    "goal": "The largest tile side length, in metres.",
+    "reason": "The side length must divide both floor dimensions, so take HCF(8,6).",
+    "paraphrase": "Find the greatest s dividing both 8 m and 6 m.",
+    "steps": [
+      "HCF(8,6) = 2, so each tile has side 2 m.",
+      "There are 8 ÷ 2 = 4 tiles along one side and 6 ÷ 2 = 3 along the other.",
+      "Total tiles = 4 × 3 = 12."
+    ],
+    "answer": 2,
+    "nums": [
+      8,
+      6
+    ],
+    "unit": "m",
+    "trap": "The requested side length is 2 m. The number of tiles is 12 and the tile area is 4 m²; these answer different questions.",
+    "goal_wrong": [
+      "The total number of tiles required.",
+      "The floor area in square metres."
+    ],
+    "reason_wrong": [
+      "The tile side must equal the floor area, 8 × 6.",
+      "The largest tile side is LCM(8,6), because each dimension divides it."
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Identical packets, none left",
+    "level": "advanced",
+    "prompt": "[[144 pens and 180 pencils|These are supplies already available.]] are packed into the [[greatest possible number of identical packets|Maximize the packet count, with the same composition in each.]] with none left.",
+    "model": "hcf",
+    "goal": "The greatest possible number of identical packets.",
+    "reason": "The packet count divides each supply; maximizing it means finding HCF.",
+    "paraphrase": "Find the greatest p dividing both 144 and 180.",
+    "steps": [
+      "HCF(144,180) = 36 packets.",
+      "Each packet contains 4 pens and 5 pencils.",
+      "36 × 4 = 144 and 36 × 5 = 180: nothing remains."
+    ],
+    "answer": 36,
+    "nums": [
+      144,
+      180
+    ],
+    "unit": "packets",
+    "trap": "",
+    "goal_wrong": [
+      "The smallest positive total divisible by all the given quantities.",
+      "The sum of all the given quantities."
+    ],
+    "reason_wrong": [
+      "The packet count is a multiple of both supply counts.",
+      "The maximum packet count is the total number of items, regardless of composition."
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Longest equal pieces",
+    "level": "intermediate",
+    "prompt": "Ropes of [[12 m, 18 m and 24 m|Use all three lengths.]] are cut into equal pieces of [[maximum length|The unknown is piece length, not how many pieces.]], with no rope left over.",
+    "model": "hcf",
+    "goal": "The maximum length of each piece in metres.",
+    "reason": "The common piece length must divide every rope length.",
+    "paraphrase": "Find HCF(12,18,24).",
+    "steps": [
+      "HCF(12,18,24) = 6 m.",
+      "The ropes yield 2, 3 and 4 pieces respectively.",
+      "There are 9 pieces altogether, each 6 m long."
+    ],
+    "answer": 6,
+    "nums": [
+      12,
+      18,
+      24
+    ],
+    "unit": "m",
+    "trap": "",
+    "goal_wrong": [
+      "The maximum number of pieces, regardless of their length.",
+      "The combined length of all ropes."
+    ],
+    "reason_wrong": [
+      "More pieces always mean longer pieces, so maximize the piece count.",
+      "Choose LCM of the rope lengths to get a piece cut from every rope."
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Least number divisible by",
+    "level": "intermediate",
+    "prompt": "Find the [[least positive number|Zero is excluded by the positive-number condition.]] [[exactly divisible by 12, 15 and 18|All the given numbers divide the answer.]].",
+    "model": "lcm",
+    "goal": "The smallest positive common multiple.",
+    "reason": "Divisibility is in the opposite direction from HCF: 12, 15 and 18 divide the unknown.",
+    "paraphrase": "Minimize M > 0 such that 12, 15 and 18 all divide M.",
+    "steps": [
+      "12 = 2² × 3; 15 = 3 × 5; 18 = 2 × 3².",
+      "LCM = 2² × 3² × 5 = 180."
+    ],
+    "answer": 180,
+    "nums": [
+      12,
+      15,
+      18
+    ],
+    "unit": "",
+    "trap": "",
+    "goal_wrong": [
+      "The greatest number dividing 12, 15 and 18.",
+      "Zero, which is excluded here."
+    ],
+    "reason_wrong": [
+      "“Divisible by” means the unknown divides each given number.",
+      "The product is always the smallest divisible number."
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Events happen together again",
+    "level": "intermediate",
+    "prompt": "Bells ring every [[6, 8 and 12 minutes|Each bell follows a repeating cycle.]]. They ring together now. When will they ring [[together again|Find the next positive elapsed time shared by all cycles.]]?",
+    "model": "lcm",
+    "goal": "The next positive elapsed time in minutes when all bells ring together.",
+    "reason": "The elapsed time must be a multiple of each bell interval; choose the least positive one.",
+    "paraphrase": "Find LCM(6,8,12) minutes after the shared start.",
+    "steps": [
+      "LCM(6,8,12) = 24 minutes.",
+      "At 24 minutes, the bells complete 4, 3 and 2 cycles."
+    ],
+    "answer": 24,
+    "nums": [
+      6,
+      8,
+      12
+    ],
+    "unit": "minutes",
+    "trap": "A common starting instant is part of the problem. Different starting offsets require more information.",
+    "goal_wrong": [
+      "The greatest positive divisor shared by the given quantities.",
+      "The sum of the given intervals or group sizes."
+    ],
+    "reason_wrong": [
+      "Take HCF of the cycle intervals to find a shared ringing time.",
+      "Adding the three intervals guarantees all bells have completed whole cycles."
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Minimum time to coincide",
+    "level": "intermediate",
+    "prompt": "Three lights flash every [[20, 30 and 45 seconds|These are intervals, all in seconds.]]. They flash together now. After how long will they [[first flash together again|Choose the least positive common elapsed time.]]?",
+    "model": "lcm",
+    "goal": "The first shared positive elapsed time in seconds.",
+    "reason": "Each interval divides the elapsed time; minimize the common multiple.",
+    "paraphrase": "Find LCM(20,30,45) seconds.",
+    "steps": [
+      "20 = 2² × 5; 30 = 2 × 3 × 5; 45 = 3² × 5.",
+      "LCM = 2² × 3² × 5 = 180 seconds.",
+      "This equals 3 minutes."
+    ],
+    "answer": 180,
+    "nums": [
+      20,
+      30,
+      45
+    ],
+    "unit": "seconds",
+    "trap": "",
+    "goal_wrong": [
+      "The greatest positive divisor shared by the given quantities.",
+      "The sum of the given intervals or group sizes."
+    ],
+    "reason_wrong": [
+      "The shortest single interval is automatically the first shared flash time.",
+      "Use HCF because the question says “minimum time”."
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Repeated schedules",
+    "level": "advanced",
+    "prompt": "Buses leave every [[15, 20 and 30 minutes|These describe repeating departure intervals.]]. All three leave at [[9:00 a.m.|The schedules start together.]]. When will they next leave together? Enter elapsed minutes.",
+    "model": "lcm",
+    "goal": "The elapsed minutes until the next simultaneous departure.",
+    "reason": "The elapsed minutes must be divisible by all three departure intervals.",
+    "paraphrase": "Find LCM(15,20,30), then add that time to 9:00 a.m.",
+    "steps": [
+      "LCM(15,20,30) = 60 minutes.",
+      "9:00 a.m. + 60 minutes = 10:00 a.m."
+    ],
+    "answer": 60,
+    "nums": [
+      15,
+      20,
+      30
+    ],
+    "unit": "minutes",
+    "trap": "Distinguish elapsed time (60 minutes) from clock time (10:00 a.m.).",
+    "goal_wrong": [
+      "The greatest positive divisor shared by the given quantities.",
+      "The sum of the given intervals or group sizes."
+    ],
+    "reason_wrong": [
+      "Compute the HCF of 15, 20 and 30 to get a common departure time.",
+      "The shared departure time is 9:00 + 15 + 20 + 30 minutes."
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Smallest total for different row sizes",
+    "level": "advanced",
+    "prompt": "Find the [[least positive number of students|The total is unknown; you are not splitting two existing totals.]] that can form rows of [[12, 15 or 20|The same total must work separately for any of these row sizes.]] with none left.",
+    "model": "lcm",
+    "goal": "The smallest total number of students fitting each row size.",
+    "reason": "Each row size must divide the total, so the total is a common multiple.",
+    "paraphrase": "Minimize N > 0 with N divisible by 12, 15 and 20.",
+    "steps": [
+      "LCM(12,15,20) = 60 students.",
+      "They form 5 rows of 12, 4 rows of 15, or 3 rows of 20."
+    ],
+    "answer": 60,
+    "nums": [
+      12,
+      15,
+      20
+    ],
+    "unit": "students",
+    "trap": "“Groups” or “rows” does not force HCF. Here we are building a new total divisible by each group size.",
+    "goal_wrong": [
+      "The largest number of identical groups made from two given totals.",
+      "The largest row size mentioned."
+    ],
+    "reason_wrong": [
+      "The word “groups” always asks for HCF, even when the total is unknown.",
+      "Use HCF to find a total that each row size divides."
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Smallest number with the same remainder",
+    "level": "superior",
+    "prompt": "Find the least whole number [[greater than 20|This rules out the trivial answer 3 and requires positive quotients.]] which, divided by [[12, 16 and 20|Subtract the common remainder to obtain a common multiple.]], leaves [[remainder 3|The remainder must be smaller than each divisor.]].",
+    "model": "remainder",
+    "goal": "The smallest number greater than 20 with remainder 3 for each divisor.",
+    "reason": "N − 3 must be a common multiple of 12, 16 and 20; choose the first one satisfying N > 20.",
+    "paraphrase": "Find N = k × LCM(12,16,20) + 3, with N > 20.",
+    "steps": [
+      "LCM(12,16,20) = 240.",
+      "N = 240k + 3; the first solution greater than 20 has k = 1.",
+      "N = 243. Check: 243 = 12 × 20 + 3 = 16 × 15 + 3 = 20 × 12 + 3."
+    ],
+    "answer": 243,
+    "nums": [
+      12,
+      16,
+      20
+    ],
+    "unit": "",
+    "trap": "Without “greater than 20” or a positive-quotient condition, the literal least nonnegative answer is 3: division by each divisor has quotient 0 and remainder 3.",
+    "goal_wrong": [
+      "The smallest common multiple with zero remainder.",
+      "The greatest number dividing all the stated divisors."
+    ],
+    "reason_wrong": [
+      "Take LCM alone; the specified remainder does not change the answer.",
+      "The least answer must be 3 even though the question requires a number greater than 20."
+    ]
+  },
+  {
+    "id": 21,
+    "title": "Greatest divisor with a shared remainder",
+    "level": "superior",
+    "prompt": "Find the [[greatest number|The unknown is the divisor.]] that divides [[125, 205 and 325|Subtract the specified remainder from every number.]] leaving [[remainder 5 each time|A valid divisor must be greater than 5.]].",
+    "model": "difference",
+    "goal": "The greatest divisor producing remainder 5 for each given number.",
+    "reason": "If n = dq + 5, then d divides n − 5. Take HCF of the adjusted numbers and check d > 5.",
+    "paraphrase": "Find HCF(125−5,205−5,325−5) and verify the remainder bound.",
+    "steps": [
+      "Adjusted numbers: 120, 200 and 320.",
+      "HCF(120,200,320) = 40, and 40 > 5.",
+      "125 = 40 × 3 + 5; 205 = 40 × 5 + 5; 325 = 40 × 8 + 5."
+    ],
+    "answer": 40,
+    "nums": [
+      120,
+      200,
+      320
+    ],
+    "unit": "",
+    "trap": "Taking HCF of the original numbers gives 5, which cannot be a divisor leaving remainder 5.",
+    "goal_wrong": [
+      "The greatest divisor of the original numbers, with zero remainder.",
+      "The smallest common multiple of the original numbers."
+    ],
+    "reason_wrong": [
+      "Take HCF of 125, 205 and 325 without subtracting the remainders.",
+      "A divisor equal to the remainder 5 is allowed."
+    ]
+  },
+  {
+    "id": 22,
+    "title": "Different specified remainders",
+    "level": "superior",
+    "prompt": "Find the greatest number dividing [[127, 206 and 329|Each number has its own specified remainder.]] leaving [[remainders 7, 6 and 9 respectively|Pair the remainders in this exact order.]].",
+    "model": "difference",
+    "goal": "The greatest divisor meeting all three remainder conditions.",
+    "reason": "Subtract each corresponding remainder, take the HCF, and require the divisor to exceed all remainders.",
+    "paraphrase": "Find HCF(127−7,206−6,329−9), then check d > 9.",
+    "steps": [
+      "127 − 7 = 120; 206 − 6 = 200; 329 − 9 = 320.",
+      "HCF = 40, which is greater than 7, 6 and 9.",
+      "127 = 40 × 3 + 7; 206 = 40 × 5 + 6; 329 = 40 × 8 + 9."
+    ],
+    "answer": 40,
+    "nums": [
+      120,
+      200,
+      320
+    ],
+    "unit": "",
+    "trap": "Do not subtract a single remainder from every number; “respectively” fixes the matching.",
+    "goal_wrong": [
+      "The greatest divisor of the original numbers, with zero remainder.",
+      "The smallest common multiple of the original numbers."
+    ],
+    "reason_wrong": [
+      "Subtract 7 from all three quantities because it is the first remainder.",
+      "The HCF of the adjusted numbers works even if it is no greater than a specified remainder."
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Unknown exponent in prime powers",
+    "level": "superior",
+    "prompt": "The HCF of [[2³ × 3ᵃ and 2⁴ × 3²|The unknown a is a nonnegative integer exponent.]] is [[2³ × 3²|For HCF, the exponent of each common prime is the minimum.]]. Determine all possible a.",
+    "model": "powers",
+    "goal": "All allowed values of the exponent a.",
+    "reason": "The 3-exponent in the HCF is min(a,2); min(a,2) = 2 means a ≥ 2.",
+    "paraphrase": "Solve min(a,2) = 2 for nonnegative integer a.",
+    "steps": [
+      "For prime 2, min(3,4) = 3, as required.",
+      "For prime 3, min(a,2) = 2.",
+      "Every integer a ≥ 2 works, including 2, 3, 4 and beyond."
+    ],
+    "answer": "Every integer a ≥ 2",
+    "nums": [],
+    "unit": "",
+    "trap": "The HCF does not determine a uniquely. Answering only a = 2 misses all larger exponents.",
+    "goal_wrong": [
+      "One original integer rather than the range of allowed exponents.",
+      "The HCF, whose prime product is already given."
+    ],
+    "reason_wrong": [
+      "The unknown exponent must equal 2; larger exponents would change the minimum.",
+      "For HCF, max(a,2) must equal 2."
+    ]
+  },
+  {
+    "id": 24,
+    "title": "Unknown number from conditions",
+    "level": "superior",
+    "prompt": "Two numbers have [[HCF 8 and LCM 96|These constrain the original pair.]]. If one number is [[32|Use the product relationship, then check feasibility.]], find the other.",
+    "model": "relationship",
+    "goal": "The missing number satisfying both conditions.",
+    "reason": "Compute the candidate with a × b = H × L, then verify its HCF and LCM with 32.",
+    "paraphrase": "Find b = 8 × 96 ÷ 32, and check the pair.",
+    "steps": [
+      "b = 768 ÷ 32 = 24.",
+      "HCF(32,24) = 8 and LCM(32,24) = 96."
+    ],
+    "answer": 24,
+    "nums": [
+      32,
+      24
+    ],
+    "unit": "",
+    "trap": "Always verify the pair. If H = 6, L = 180 and one number were 24, the product formula would give 45, but HCF(24,45) = 3 and LCM = 360. Those conditions have no solution.",
+    "goal_wrong": [
+      "A value found by adding all quantities mentioned.",
+      "The HCF of the numbers as printed, regardless of which are products or conditions."
+    ],
+    "reason_wrong": [
+      "Use LCM ÷ HCF to get the other number and ignore 32.",
+      "Satisfying the product equation alone guarantees every HCF/LCM condition."
+    ]
+  },
+  {
+    "id": 25,
+    "title": "Can these be HCF and LCM?",
+    "level": "distinguished",
+    "prompt": "[[Can 12 and 90|This asks for feasibility, not a calculation on 12 and 90.]] be the [[HCF and LCM respectively|The proposed HCF must divide the proposed LCM.]] of two positive integers?",
+    "model": "feasibility",
+    "goal": "Whether a pair of positive integers with the stated HCF and LCM can exist.",
+    "reason": "Every HCF divides the corresponding LCM; 12 does not divide 90.",
+    "paraphrase": "Test whether 90 ÷ 12 is a whole number.",
+    "steps": [
+      "90 ÷ 12 = 7.5, not an integer.",
+      "Therefore no pair of positive integers has HCF 12 and LCM 90.",
+      "If H divides L, the pair (H,L) itself demonstrates feasibility."
+    ],
+    "answer": "No, because 12 does not divide 90",
+    "nums": [],
+    "unit": "",
+    "trap": "HCF < LCM is necessary but not sufficient. Divisibility is the key condition.",
+    "goal_wrong": [
+      "The HCF of 12 and 90 as if they were the original pair.",
+      "The product of 12 and 90."
+    ],
+    "reason_wrong": [
+      "Since 12 < 90, they must be a valid HCF and LCM.",
+      "Compute HCF(12,90); that alone decides the proposed pair’s feasibility."
+    ]
+  },
+  {
+    "id": 26,
+    "title": "Find all possible number pairs",
+    "level": "distinguished",
+    "prompt": "HCF is [[6 and LCM is 72|Normalize both numbers by the HCF.]]. Find [[all unordered pairs|Reversing a pair does not create a new unordered pair.]] of positive integers.",
+    "model": "pairs",
+    "goal": "Every unordered pair satisfying both the HCF and LCM.",
+    "reason": "Write a = 6x and b = 6y, with gcd(x,y) = 1 and xy = 72 ÷ 6 = 12.",
+    "paraphrase": "Find coprime factor pairs of 12, then multiply each entry by 6.",
+    "steps": [
+      "Factor pairs of 12: (1,12), (2,6), (3,4).",
+      "Keep only coprime pairs: (1,12) and (3,4).",
+      "Multiply by 6: (6,72) and (18,24).",
+      "Reject (12,36), since their HCF is 12, not 6."
+    ],
+    "answer": "(6,72) and (18,24)",
+    "nums": [],
+    "unit": "",
+    "trap": "The product condition alone also produces pairs with the wrong HCF. Coprimality of the normalized pair is essential.",
+    "goal_wrong": [
+      "Any pair with the right product, without checking HCF.",
+      "Only a single pair, even when the question asks for all pairs."
+    ],
+    "reason_wrong": [
+      "Every factor pair of 12 gives a valid original pair, whether coprime or not.",
+      "Only the pair (6,72) can have this HCF and LCM."
+    ]
+  },
+  {
+    "id": 27,
+    "title": "Assertion–Reason",
+    "level": "distinguished",
+    "prompt": "Assertion: HCF of [[two consecutive positive integers|Write them as n and n + 1.]] is 1. Reason: [[Consecutive integers are coprime|Decide truth and whether the reason explains the assertion.]].",
+    "model": "logic",
+    "goal": "Whether each statement is true and whether the reason explains the assertion.",
+    "reason": "Coprime means HCF 1; any common divisor of n and n + 1 divides their difference 1.",
+    "paraphrase": "Test both statements and connect them using the difference of consecutive integers.",
+    "steps": [
+      "Let d divide n and n + 1. Then d divides (n + 1) − n = 1.",
+      "So d = 1, and the assertion is true.",
+      "The reason is true and explains the assertion: coprime means HCF 1."
+    ],
+    "answer": "Both true; the reason explains the assertion",
+    "nums": [
+      14,
+      15
+    ],
+    "unit": "",
+    "trap": "In Assertion–Reason questions, two true statements need not automatically be an explanation of each other.",
+    "goal_wrong": [
+      "Only the truth of the assertion; the reason can be ignored.",
+      "A numerical LCM of the two consecutive integers."
+    ],
+    "reason_wrong": [
+      "If both statements are true, the reason automatically explains the assertion.",
+      "Consecutive positive integers share a common factor greater than 1."
+    ]
+  },
+  {
+    "id": 28,
+    "title": "MCQ disguised as divisibility",
+    "level": "intermediate",
+    "prompt": "The [[least positive number|Minimize a positive common multiple.]] [[divisible by both 24 and 36|The inputs divide the answer.]] is: A. 12  B. 60  C. 72  D. 864.",
+    "model": "lcm",
+    "goal": "The smallest positive multiple of both 24 and 36.",
+    "reason": "24 and 36 must divide the unknown; the smallest such number is their LCM.",
+    "paraphrase": "Find LCM(24,36), then select the matching option.",
+    "steps": [
+      "24 = 2³ × 3; 36 = 2² × 3².",
+      "LCM = 2³ × 3² = 72, so choose C.",
+      "12 is the HCF; 60 is the sum; 864 is a common multiple but not the least."
+    ],
+    "answer": 72,
+    "nums": [
+      24,
+      36
+    ],
+    "unit": "",
+    "trap": "Do not choose a familiar-looking option before checking divisibility and minimality.",
+    "goal_wrong": [
+      "The greatest positive divisor shared by the given quantities.",
+      "The sum of the given intervals or group sizes."
+    ],
+    "reason_wrong": [
+      "12 divides both 24 and 36, so it is divisible by both of them.",
+      "864 is divisible by both inputs, so it must be the least such number."
+    ]
+  },
+  {
+    "id": 29,
+    "title": "Case study with extra information",
+    "level": "superior",
+    "prompt": "School activities A, B and C repeat every [[4, 6 and 8 days|All three cycles start together on day 0.]]. Each activity lasts [[30 minutes|Duration is extra information for these day-cycle questions.]]. (i) On which positive day do [[all three next coincide|Find a shared multiple.]]? (ii) When do A and B next coincide? (iii) How many A sessions occur after day 0 up to and including the all-three day?",
+    "model": "case",
+    "goal": "Three related results: all-three day, A-and-B day, and A session count.",
+    "reason": "Use LCM for coincidence, then divide the all-three day by A’s interval to count its sessions.",
+    "paraphrase": "Find LCM(4,6,8), LCM(4,6), and LCM(4,6,8) ÷ 4.",
+    "steps": [
+      "(i) LCM(4,6,8) = 24: all three coincide on day 24.",
+      "(ii) LCM(4,6) = 12: A and B coincide on day 12.",
+      "(iii) A occurs on days 4,8,12,16,20,24: 6 sessions.",
+      "The 30-minute duration does not affect these repeating day intervals."
+    ],
+    "answer": "(i) day 24; (ii) day 12; (iii) 6 sessions",
+    "nums": [
+      4,
+      6,
+      8
+    ],
+    "unit": "",
+    "trap": "Answer each subquestion. The final session count is not another LCM, and day 0 is excluded explicitly.",
+    "goal_wrong": [
+      "Only the day all three coincide, ignoring the other subquestions.",
+      "The total minutes spent on all activities."
+    ],
+    "reason_wrong": [
+      "Use all numbers in the story, including the 30-minute duration, in one LCM.",
+      "Use the same LCM as the answer to all three subquestions."
+    ]
+  },
+  {
+    "id": 30,
+    "title": "Planning: groups and schedules",
+    "level": "distinguished",
+    "prompt": "A school has [[48 notebooks and 60 pencils|Available materials will be split into identical kits.]]. Make the [[maximum number of identical kits|This asks for a shared divisor.]] with none left. Two delivery vans arrive every [[15 and 20 minutes|Their intervals start together now.]]. When do they [[next arrive together|This asks for a shared multiple.]]? Explain both choices.",
+    "model": "combined",
+    "goal": "Both the maximum kit count and the next shared delivery time.",
+    "reason": "The kit count divides each supply, while elapsed delivery time is divisible by each interval: use HCF, then LCM.",
+    "paraphrase": "Find HCF(48,60) kits and LCM(15,20) minutes.",
+    "steps": [
+      "HCF(48,60) = 12 kits, with 4 notebooks and 5 pencils per kit.",
+      "LCM(15,20) = 60 minutes until both vans arrive together again.",
+      "The same story needs different models because the target quantities differ."
+    ],
+    "answer": "12 kits; 60 minutes",
+    "nums": [
+      48,
+      60
+    ],
+    "unit": "",
+    "trap": "The objects in a story do not choose the operation. State what each unknown quantity must divide or be divisible by.",
+    "goal_wrong": [
+      "Only the maximum kit count; the schedule is irrelevant to every part.",
+      "One single number answering both supplies and schedules."
+    ],
+    "reason_wrong": [
+      "Use HCF for everything because the story mentions identical kits.",
+      "Use LCM for everything because the story mentions delivery cycles."
+    ]
+  }
+];
+  const LEVELS = {
+    novice: ['Novice', 'Direct instructions: name the target and read the specified method or prime powers.'],
+    intermediate: ['Intermediate', 'Paraphrases: translate “divides exactly”, “divisible by”, and “together again” into constraints.'],
+    advanced: ['Advanced', 'Stories: decide whether the unknown divides existing quantities or is divisible by group sizes and intervals.'],
+    superior: ['Superior', 'Multiple steps: handle remainders, missing numbers, exponents, extra information, and case-study subquestions.'],
+    distinguished: ['Distinguished', 'Explain and critique: test feasibility, find all pairs, justify statements, and distinguish two models within one story.']
+  };
+  const MODELS = {
+    hcf: 'HCF · greatest shared divisor',
+    lcm: 'LCM · least positive shared multiple',
+    prime: 'Prime powers → both HCF and LCM',
+    relationship: 'Two-number relationship · H × L = a × b',
+    difference: 'Adjust remainders → HCF of the differences',
+    remainder: 'Common-multiple family · N = kL + remainder',
+    powers: 'Prime exponents · solve a minimum-power condition',
+    feasibility: 'Feasibility · the proposed HCF must divide the LCM',
+    pairs: 'Possible pairs · normalize by HCF and require coprimality',
+    logic: 'Assertion–Reason · test truth and explanatory connection',
+    case: 'Case study · LCM, then a session count',
+    combined: 'Planning · HCF for supplies, LCM for cycles'
+  };
+  const ALTERNATIVES = {
+    hcf:['hcf','lcm','relationship'], lcm:['lcm','hcf','difference'],
+    prime:['prime','hcf','lcm'], relationship:['relationship','difference','remainder'],
+    difference:['difference','hcf','remainder'], remainder:['remainder','difference','lcm'],
+    powers:['powers','relationship','feasibility'], feasibility:['feasibility','relationship','pairs'],
+    pairs:['pairs','relationship','feasibility'], logic:['logic','hcf','relationship'],
+    case:['case','hcf','lcm'], combined:['combined','hcf','lcm']
+  };
+  const $ = id => document.getElementById(id);
+  const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const gcd = (a,b) => b ? gcd(b,a%b) : a;
+  const lcm = (a,b) => a/gcd(a,b)*b;
+  const factors = n => {const f=[];for(let i=1;i*i<=n;i++)if(n%i===0){f.push(i);if(i*i!==n)f.push(n/i);}return f.sort((a,b)=>a-b);};
+  const powers = n => {const f={};for(let p=2;p*p<=n;p++)while(n%p===0){f[p]=(f[p]||0)+1;n/=p;}if(n>1)f[n]=(f[n]||0)+1;return Object.entries(f).map(([p,e])=>e===1?p:p+'<sup>'+e+'</sup>').join(' × ')||'1';};
+  const urlParams = new URLSearchParams(location.search);
+  let level = LEVELS[urlParams.get('reading_level')] ? urlParams.get('reading_level') : 'novice';
+  let current = QUESTIONS.find(q=>q.level===level), drafts = new Map(), attempts = new Map();
+  const choicesFor = (values, seed) => values.map((text,index)=>({text,index})).slice(seed%values.length).concat(values.map((text,index)=>({text,index})).slice(0,seed%values.length));
+  function filtered(){
+    const search=$('reading-filter').value.trim().toLowerCase();
+    return QUESTIONS.filter(q=>($('all-levels').checked||q.level===level)&&(!search||[q.title,q.prompt,MODELS[q.model],LEVELS[q.level][0]].join(' ').toLowerCase().includes(search)));
+  }
+  function updateURL(){
+    const url=new URL(location.href);url.searchParams.set('focus','reading');url.searchParams.set('reading_level',level);
+    try{history.replaceState(null,'',url);}catch(e){}
+  }
+  function renderLibrary(){
+    $('level-description').textContent=LEVELS[level][1];$('reading-level').value=level;
+    const shareURL=new URL(location.href);shareURL.searchParams.set('focus','reading');shareURL.searchParams.set('reading_level',level);$('reading-share').href=shareURL.href;
+    const list=filtered();$('library-count').textContent=list.length+' of 30 forms shown · '+attempts.size+' explored this session';
+    $('reading-library').innerHTML=list.length?list.map(q=>`<button type="button" class="form-choice" data-form="${q.id}" aria-pressed="${q.id===current.id}">${q.id}. ${escape(q.title)}<small>${LEVELS[q.level][0]}${attempts.has(q.id)?' · explored':''}</small></button>`).join(''):'<p>No matching forms. Try another phrase or browse all levels.</p>';
+    $('reading-library').querySelectorAll('[data-form]').forEach(button=>button.onclick=()=>selectQuestion(Number(button.dataset.form)));
+  }
+  function saveDraft(){drafts.set(current.id,$('paraphrase').value);}
+  function annotatedQuestion(prompt){
+    let out='',pos=0;const pattern=/\[\[([^|]+)\|([^\]]+)\]\]/g;let m;
+    while((m=pattern.exec(prompt))){out+=escape(prompt.slice(pos,m.index))+`<button type="button" class="word-fragment" aria-pressed="false" data-note="${escape(m[2])}">${escape(m[1])}</button>`;pos=pattern.lastIndex;}
+    return out+escape(prompt.slice(pos));
+  }
+  function bindChoices(id,values,callback){
+    $(id).innerHTML=choicesFor(values,current.id).map(choice=>`<button type="button" class="reading-choice" aria-pressed="false" data-choice="${choice.index}">${escape(choice.text)}</button>`).join('');
+    $(id).querySelectorAll('button').forEach(button=>button.onclick=()=>{
+      $(id).querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+      callback(Number(button.dataset.choice));
+    });
+  }
+  function feedback(id,correct,text){$(id).classList.toggle('retry',!correct);$(id).textContent=(correct?'That fits. ':'Re-read the target. ')+text;}
+  function meaningVisual(q){
+    const nums=q.nums;if(nums.length<2)return `<p><strong>Turn words into a condition.</strong> ${escape(q.paraphrase)}</p>`;
+    if(q.model==='hcf'||q.model==='difference'){
+      const h=nums.reduce(gcd),shared=factors(h);
+      return `<strong>${q.model==='difference'?'Shared divisors of the adjusted quantities':'The unknown divides each quantity'}</strong><p>${nums.map(n=>n+' ÷ d').join(', ')} must each be whole numbers.</p><div class="meaning-numbers">${shared.map(n=>`<span class="${n===h?'match':''}">d = ${n}</span>`).join('')}</div><p>The greatest shared divisor is ${h}. ${q.unit?`In this question, it represents ${escape(q.goal.toLowerCase())}`:''}</p>`;
+    }
+    if(q.model==='lcm'||q.model==='case'){
+      const l=nums.reduce(lcm);
+      return `<strong>Each quantity divides the unknown</strong><p>M ÷ ${nums.join(', M ÷ ')} must each be whole.</p>${nums.map(n=>`<p>Multiples of ${n}</p><div class="meaning-numbers">${Array.from({length:Math.min(6,l/n)},(_,i)=>(i+1)*n).map(m=>`<span class="${m===l?'match':''}">${m}</span>`).join('')}${l/n>6?`<span>… ${l}</span>`:''}</div>`).join('')}<p>The first positive shared multiple is ${l}.</p>`;
+    }
+    if(q.model==='prime')return `<strong>Read the prime powers</strong>${nums.map(n=>`<p>${n} = ${powers(n)}</p>`).join('')}<p>Shared minimum powers → HCF. All maximum powers → LCM.</p>`;
+    return `<strong>Translate the target before calculating</strong><p>${escape(q.paraphrase)}</p>`;
+  }
+  function renderQuestion(){
+    const q=current;
+    $('question-area').innerHTML=`<div class="reading-eyebrow">${LEVELS[q.level][0]} · Form ${q.id} of 30</div><h2>${escape(q.title)}</h2><div class="question-text">${annotatedQuestion(q.prompt)}</div><p class="muted">Tap an underlined phrase to inspect its meaning. Ask what the quantity does, not just which word you recognize.</p><div id="phrase-feedback" role="status"></div>`;
+    document.querySelectorAll('.word-fragment').forEach(button=>button.onclick=()=>{
+      document.querySelectorAll('.word-fragment').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+      $('phrase-feedback').textContent=button.dataset.note;
+    });
+    for(const id of ['goal-feedback','model-feedback','reason-feedback','meaning-visual']){$(id).textContent='';$(id).classList.remove('retry');}
+    bindChoices('goal-options',[q.goal,...q.goal_wrong],index=>feedback('goal-feedback',index===0,index===0?q.goal:'Track the unknown quantity: '+q.goal));
+    const models=ALTERNATIVES[q.model];
+    bindChoices('model-options',models.map(m=>MODELS[m]),index=>{
+      const correct=models[index]===q.model;
+      feedback('model-feedback',correct,correct?q.reason:modelHint(q,models[index]));
+      $('meaning-visual').innerHTML=correct?meaningVisual(q):'';
+    });
+    bindChoices('reason-options',[q.reason,...q.reason_wrong],index=>feedback('reason-feedback',index===0,index===0?'You connected the target to a mathematical constraint.':'Check the direction of divisibility and every condition. '+q.reason));
+    $('paraphrase').value=drafts.get(q.id)||'';$('paraphrase-model').hidden=true;
+    $('paraphrase-model').innerHTML=`<strong>One model paraphrase</strong><p>${escape(q.paraphrase)}</p><p class="muted">Compare the target, constraints, and unit with your wording. Other accurate paraphrases are valid.</p>`;
+    $('show-paraphrase').textContent='Compare with a model paraphrase';
+    $('worked-solution').hidden=true;$('worked-solution').innerHTML='';$('show-worked').textContent='Explore the worked solution';
+    $('answer-entry').innerHTML=typeof q.answer==='number'?`<label for="reading-answer">Optional calculation: your answer${q.unit?' ('+escape(q.unit)+')':''}</label><input type="number" step="any" id="reading-answer" placeholder="Try the calculation before opening the solution"><button type="button" class="btn secondary" id="check-calculation" style="margin-top:10px">Check this calculation</button><p id="calculation-feedback" role="status"></p>`:`<p class="muted">This form asks for ${escape(q.goal.toLowerCase())} Use your notes or paraphrase box, then compare with the worked reasoning.</p>`;
+    if($('check-calculation'))$('check-calculation').onclick=()=>{
+      const raw=$('reading-answer').value.trim(),n=Number(raw);
+      $('calculation-feedback').textContent=!raw||!Number.isFinite(n)?'Enter a finite number to check.':n===q.answer?'The calculation matches. Now explain why that quantity answers this question.':'This value does not match the target. Check the unit and conditions, or explore the worked solution.';
+    };
+    renderLibrary();
+  }
+  function modelHint(q,selected){
+    if(q.model==='prime')return 'The instruction requests both HCF and LCM. Use prime powers to derive both.';
+    if(q.model==='relationship')return 'Use the supplied product, HCF, LCM or original number in H × L = a × b; check the original pair when finding a missing number.';
+    if(q.model==='difference')return 'The divisor leaves remainders, so first subtract the specified remainder from each quantity. Direct HCF of the original quantities misses those conditions.';
+    if(q.model==='remainder')return 'The original number is not itself a common multiple. Subtract its shared remainder and check the lower bound.';
+    if(q.model==='hcf')return 'The unknown divides all existing quantities. Choose the greatest common divisor, rather than a common multiple.';
+    if(q.model==='lcm')return 'The given sizes or intervals divide the unknown total or time. Choose the least positive common multiple.';
+    return 'A single computation is not enough here. '+q.reason;
+  }
+  function selectQuestion(id){
+    saveDraft();current=QUESTIONS.find(q=>q.id===id);
+    if(!$('all-levels').checked&&current.level!==level){level=current.level;updateURL();}
+    renderQuestion();
+  }
+  $('reading-level').value=level;
+  $('reading-level').onchange=()=>{saveDraft();level=$('reading-level').value;current=QUESTIONS.find(q=>q.level===level);$('reading-filter').value='';updateURL();renderQuestion();};
+  $('reading-filter').oninput=renderLibrary;$('all-levels').onchange=renderLibrary;
+  $('show-paraphrase').onclick=()=>{const box=$('paraphrase-model');box.hidden=!box.hidden;$('show-paraphrase').textContent=box.hidden?'Compare with a model paraphrase':'Hide model paraphrase';};
+  $('show-worked').onclick=()=>{
+    const q=current,box=$('worked-solution');box.hidden=!box.hidden;
+    if(!box.hidden){box.innerHTML=`<div class="reading-eyebrow">From language to mathematics</div><p><strong>Target:</strong> ${escape(q.goal)}</p><p><strong>Model:</strong> ${escape(MODELS[q.model])}</p><ol>${q.steps.map(step=>`<li>${escape(step)}</li>`).join('')}</ol><p class="worked-answer">${escape(q.answer)}${q.unit?' '+escape(q.unit):''}</p>${q.trap?`<p><strong>Reading trap:</strong> ${escape(q.trap)}</p>`:''}<p><strong>Explain why:</strong> ${escape(q.reason)}</p>`;attempts.set(q.id,true);renderLibrary();}
+    $('show-worked').textContent=box.hidden?'Explore the worked solution':'Hide worked solution';
+  };
+  $('next-form').onclick=()=>{
+    const list=filtered();if(!list.length){$('reading-filter').value='';renderLibrary();return;}
+    const index=list.findIndex(q=>q.id===current.id);selectQuestion(list[(index+1)%list.length].id);
+  };
+  $('language-map').innerHTML=QUESTIONS.map(q=>`<tr><td>${q.id}</td><td>${escape(q.title)}</td><td>${escape(MODELS[q.model])}</td><td><button type="button" data-map="${q.id}" aria-label="Practise ${escape(q.title)}">Practise</button></td></tr>`).join('');
+  $('language-map').querySelectorAll('button').forEach(button=>button.onclick=()=>{
+    $('reading-filter').value='';$('all-levels').checked=false;selectQuestion(Number(button.dataset.map));
+    $('question-area').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
+  });
+  function contrast(which){
+    $('contrast-output').innerHTML=which==='divide'?'<p><strong>Question:</strong> Split 12 boys and 18 girls into the maximum number of identical groups, using everyone.</p><p><strong>Target:</strong> group count g. It must divide both existing quantities.</p><p><strong>HCF(12,18) = 6 groups.</strong> Each has 2 boys and 3 girls.</p>':'<p><strong>Question:</strong> Find the minimum positive number of students that can be arranged separately in groups of 12 or groups of 18, with none left.</p><p><strong>Target:</strong> total students N. Each group size must divide N.</p><p><strong>LCM(12,18) = 36 students.</strong> Make 3 groups of 12 or 2 groups of 18.</p>';
+    document.querySelectorAll('[data-contrast]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.contrast===which)));
+  }
+  document.querySelectorAll('[data-contrast]').forEach(button=>button.onclick=()=>contrast(button.dataset.contrast));
+  contrast('divide');renderQuestion();
+  if(urlParams.has('reading_level')&&!LEVELS[urlParams.get('reading_level')])$('reading-url-notice').textContent='Unknown reading level; starting with Novice.';
+  if(urlParams.has('focus')&&!['reading','hcf-lcm','lcm','euclid','irrational'].includes(urlParams.get('focus'))) $('reading-url-notice').textContent+=' Unknown focus; starting with question reading.';
+})();
+
+</script>
 <script id="topic-preset-script">
 /* Topic presets use reusable mathematical values, never question identifiers. */
 (() => {
   'use strict';
-  const schema = {"numbers": {"label": "Integers, separated by commas", "default": "72,120", "type": "text", "pattern": /^\d{1,6}(,\d{1,6}){1,5}$/}, "focus": {"label": "Explore", "default": "hcf-lcm", "options": ["hcf-lcm", "lcm", "euclid", "irrational"]}, "number": {"label": "Irrational example", "default": "sqrt2", "options": ["sqrt2", "sqrt3", "pi"]}};
+  const schema = {"numbers": {"label": "Integers, separated by commas", "default": "72,120", "type": "text", "pattern": /^\d{1,6}(,\d{1,6}){1,5}$/}, "focus": {"label": "Explore", "default": "reading", "options": ["reading", "hcf-lcm", "lcm", "euclid", "irrational"]}, "number": {"label": "Irrational example", "default": "sqrt2", "options": ["sqrt2", "sqrt3", "pi"]}, "reading_level": {"label": "Reading progression", "default": "novice", "options": ["novice", "intermediate", "advanced", "superior", "distinguished"]}};
   const params = new URLSearchParams(location.search);
-  if (!Object.keys(schema).some(key => params.has(key))) return;
+
   const state = {}, invalid = [];
   for (const [key, spec] of Object.entries(schema)) {
     const raw = params.get(key);
@@ -887,9 +2043,10 @@
     document.head.append(style);
     const section=document.createElement('section');section.id='topic-preset';section.setAttribute('aria-label','Explore the URL setup');
     section.innerHTML=`<h2>${esc(title)}</h2><p>Change the values to explore this topic. The link below shares the current setup.</p>${invalid.length?`<p class="preset-error">Invalid URL values for ${esc(invalid.join(', '))}; using the defaults shown below.</p>`:''}<form class="preset-controls"></form><div class="preset-result" aria-live="polite"></div><p><a class="preset-share">Open or copy this setup</a></p>`;
-    document.body.insertBefore(section,document.body.firstChild);
+    document.getElementById('preset-mount').append(section);
     const form=section.querySelector('form');const more=document.createElement('details');more.innerHTML='<summary>More exploration settings</summary>';const extra=document.createElement('div');extra.className='preset-controls';more.append(extra);section.insertBefore(more,section.querySelector('.preset-result'));form.addEventListener('submit',event=>event.preventDefault());
     for(const [key,spec] of Object.entries(schema)){
+      if(key==='reading_level')continue;
       const label=document.createElement('label');label.textContent=spec.label;
       const input=document.createElement(spec.options?'select':'input');input.name=key;input.id='preset-'+key;
       if(spec.options)for(const value of spec.options){const option=document.createElement('option');option.value=value;option.textContent=value.replaceAll('-',' ');input.append(option);}
@@ -897,8 +2054,11 @@
       input.value=state[key];label.append(input);(params.has(key)?form:extra).append(label);
       input.addEventListener('change',()=>{const value=input.type==='number'?Number(input.value):input.value;const valid=spec.options?spec.options.includes(value):spec.type==='text'?value.length<=180&&spec.pattern.test(value):input.value.trim()&&Number.isFinite(value)&&value>=spec.min&&value<=spec.max&&(!spec.integer||Number.isInteger(value));if(!valid){input.value=state[key];return;}state[key]=value;refresh();});
     }
-    function refresh(){const result=section.querySelector('.preset-result');result.innerHTML=render(state);const url=new URL(location.href);for(const key of Object.keys(schema))url.searchParams.set(key,state[key]);section.querySelector('.preset-share').href=url.href;sync(state);}
+    function refresh(){const result=section.querySelector('.preset-result');result.innerHTML=render(state);const url=new URL(location.href);for(const key of Object.keys(schema))url.searchParams.set(key,key==='reading_level'?document.getElementById('reading-level').value:state[key]);section.querySelector('.preset-share').href=url.href;sync(state);}
     refresh();
+    if(params.has('focus') && state.focus!=='reading'){
+      document.querySelector(`nav.tabs button[data-panel="${state.focus==='euclid'?'euclid':'sandbox'}"]`).click();
+    }
   }
   if(document.readyState==='complete')mount();else window.addEventListener('load',mount,{once:true});
 })();

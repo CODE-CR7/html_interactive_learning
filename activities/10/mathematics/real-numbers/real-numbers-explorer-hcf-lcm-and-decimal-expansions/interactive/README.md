@@ -1,0 +1,78 @@
+# HCF & LCM Question Reading Lab
+
+This Class X activity helps learners who can calculate HCF and LCM but need practice recognizing what unfamiliar question wording asks them to do.
+
+Open [index.html](index.html). The activity is self-contained, with embedded CSS and JavaScript and no build step.
+
+## Student flow
+
+1. Choose a reading level or browse all 30 question forms.
+2. Tap underlined phrases to inspect quantities, constraints, units, and irrelevant information.
+3. Identify the target quantity and choose a mathematical model. Incorrect choices receive explanatory feedback and can be retried.
+4. Select a justification, write a paraphrase, and compare it with a model paraphrase.
+5. Optionally check a numerical calculation, then explore the worked solution and reading trap.
+
+Every form and explanation is available without a timer, marks, or a locked progression. Paraphrases are self-assessed; the activity does not automatically grade free-text writing. Draft paraphrases and the count of explored forms last for the current page session only.
+
+## Reading progression
+
+| Level | Focus | Question forms |
+| --- | --- | --- |
+| Novice | Direct instructions, supplied prime factors, and basic product relationships | 1–6 |
+| Intermediate | Divisibility paraphrases, equal pieces, repeated events, and disguised MCQs | 9, 14–17, 28 |
+| Advanced | Stories requiring HCF or LCM without naming the operation | 10–13, 18–19 |
+| Superior | Missing numbers, remainders, unknown exponents, and a multi-part case study | 7–8, 20–24, 29 |
+| Distinguished | Feasibility, all possible pairs, Assertion–Reason, and combined planning | 25–27, 30 |
+
+These are instructional groupings, not official proficiency certifications. The complete language map links to every form.
+
+## Core distinction
+
+- **HCF:** the unknown divides existing quantities. Examples include longest pieces, square-tile side length, and maximum counts of identical groups or packets.
+- **LCM:** the given quantities divide an unknown total or elapsed time. Examples include compatible row totals and cycles coinciding after a shared start.
+
+The interactive “groups” comparison uses the same inputs, 12 and 18, to contrast HCF (6 identical groups from existing supplies) with LCM (a total of 36 students compatible with either group size).
+
+## Mathematical reading safeguards
+
+- Form 20 explicitly asks for a number **greater than 20**. This gives 243 for divisors 12, 16, 20 and remainder 3; without a lower-bound or positive-quotient condition, 3 itself is a valid smaller answer.
+- Forms 21–22 subtract the corresponding remainders before finding HCF and verify that the divisor exceeds every remainder.
+- Form 23 accepts **every integer exponent `a ≥ 2`**, not only `a = 2`.
+- Missing-number solutions verify the original HCF and LCM after using the product formula.
+- Possible-pair reasoning requires coprime normalized factors.
+- The HCF × LCM product identity is used for **two** positive integers, not generalized unchanged to three inputs.
+- Length problems use common units; coincidence problems specify a shared starting instant.
+
+## Supporting tools and URL settings
+
+The reading questions use fixed examples. The Euclid algorithm, prime-factor ladders, rational-decimal analyser, and number sandbox provide editable values in the supporting navigation tabs.
+
+Start at a reading level with:
+
+```text
+?focus=reading&reading_level=advanced
+```
+
+`reading_level` accepts `novice`, `intermediate`, `advanced`, `superior`, or `distinguished`. Missing or invalid levels start at Novice. Switching levels updates the URL, and **Open this reading level** provides a bookmarkable link. Individual question forms, paraphrases, and explored counts are not encoded in the URL.
+
+Existing topic URLs continue to work:
+
+- `?numbers=72%2C120&focus=hcf-lcm`
+- `?numbers=8%2C12%2C15&focus=lcm`
+- `?numbers=96%2C404&focus=euclid`
+- `?focus=irrational&number=sqrt2`
+
+The sandbox accepts two to six comma-separated positive integers up to 999999 and checks that its LCM is a safe integer. The Euclid and factor-ladder tools use the first pair when their input ranges allow it. Irrational examples accept `sqrt2`, `sqrt3`, and `pi`.
+
+## Validation
+
+Run from the repository root:
+
+```sh
+node scripts/test_real_numbers_reading_lab.js
+ruby -E UTF-8:UTF-8 scripts/generate_catalog.rb
+ruby -E UTF-8:UTF-8 scripts/generate_catalog.rb --check
+python3 scripts/validate_activity_urls.py
+```
+
+The dedicated test checks all 30 forms, numerical answers, units, remainder bounds, the exponent range, feasible pairs, and embedded script syntax. Browser checks should cover choice feedback, paraphrase retention, level switching, searching, worked solutions, the supporting tools, and narrow-screen layout.
